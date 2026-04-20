@@ -1,0 +1,286 @@
+{
+  "$schema": "https://raw.githubusercontent.com/martinring/tmlanguage/master/tmlanguage.json",
+  "name": "FuturLang",
+  "scopeName": "source.fl",
+  "fileTypes": ["fl"],
+  "patterns": [
+    { "include": "#comments" },
+    { "include": "#strings" },
+    { "include": "#block-openers" },
+    { "include": "#proof-keywords" },
+    { "include": "#blockchain-keywords" },
+    { "include": "#modifiers" },
+    { "include": "#connectives" },
+    { "include": "#math-symbols" },
+    { "include": "#types" },
+    { "include": "#numbers" },
+    { "include": "#operators" },
+    { "include": "#punctuation" },
+    { "include": "#identifiers" }
+  ],
+  "repository": {
+
+    "comments": {
+      "patterns": [
+        {
+          "name": "comment.line.double-slash.fl",
+          "match": "//.*$"
+        }
+      ]
+    },
+
+    "strings": {
+      "name": "string.quoted.double.fl",
+      "begin": "\"",
+      "end": "\"",
+      "patterns": [
+        { "name": "constant.character.escape.fl", "match": "\\\\." }
+      ]
+    },
+
+    "block-openers": {
+      "patterns": [
+        {
+          "comment": "theorem Name() {",
+          "match": "\\b(theorem|lemma)\\s+(\\w+)",
+          "captures": {
+            "1": { "name": "keyword.declaration.theorem.fl" },
+            "2": { "name": "entity.name.function.theorem.fl" }
+          }
+        },
+        {
+          "comment": "proof Name() {",
+          "match": "\\b(proof)\\s+(\\w+)",
+          "captures": {
+            "1": { "name": "keyword.declaration.proof.fl" },
+            "2": { "name": "entity.name.function.proof.fl" }
+          }
+        },
+        {
+          "comment": "definition Name {",
+          "match": "\\b(definition)\\s+(\\w+)",
+          "captures": {
+            "1": { "name": "keyword.declaration.definition.fl" },
+            "2": { "name": "entity.name.type.definition.fl" }
+          }
+        },
+        {
+          "comment": "struct Name {",
+          "match": "\\b(struct)\\s+(\\w+)",
+          "captures": {
+            "1": { "name": "keyword.declaration.struct.fl" },
+            "2": { "name": "entity.name.type.struct.fl" }
+          }
+        },
+        {
+          "comment": "type Name {",
+          "match": "\\b(type)\\s+(\\w+)",
+          "captures": {
+            "1": { "name": "keyword.declaration.type.fl" },
+            "2": { "name": "entity.name.type.fl" }
+          }
+        },
+        {
+          "comment": "fn Name(...) -> Type {",
+          "match": "\\b(fn)\\s+(\\w+)",
+          "captures": {
+            "1": { "name": "keyword.declaration.fn.fl" },
+            "2": { "name": "entity.name.function.fl" }
+          }
+        },
+        {
+          "comment": "program Name {",
+          "match": "\\b(program)\\s+(\\w+)",
+          "captures": {
+            "1": { "name": "keyword.declaration.program.fl storage.type.fl" },
+            "2": { "name": "entity.name.type.program.fl" }
+          }
+        },
+        {
+          "comment": "account Name {",
+          "match": "\\b(account)\\s+(\\w+)",
+          "captures": {
+            "1": { "name": "keyword.declaration.account.fl storage.type.fl" },
+            "2": { "name": "entity.name.type.account.fl" }
+          }
+        },
+        {
+          "comment": "instruction Name(...) {",
+          "match": "\\b(instruction)\\s+(\\w+)",
+          "captures": {
+            "1": { "name": "keyword.declaration.instruction.fl storage.type.fl" },
+            "2": { "name": "entity.name.function.instruction.fl" }
+          }
+        },
+        {
+          "comment": "error Name {",
+          "match": "\\b(error)\\s+(\\w+)",
+          "captures": {
+            "1": { "name": "keyword.declaration.error.fl" },
+            "2": { "name": "entity.name.type.error.fl" }
+          }
+        }
+      ]
+    },
+
+    "proof-keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.proof.fl",
+          "match": "\\b(assume|conclude|declareToProve|prove|derive|given|apply|intro|rewrite|exact|obtain|induction|base|step|match|case|return|setVar|requires|ensures|AndIntro|OrIntro)\\b"
+        },
+        {
+          "name": "keyword.control.assert.deprecated.fl",
+          "match": "\\b(assert)\\b"
+        }
+      ]
+    },
+
+    "blockchain-keywords": {
+      "patterns": [
+        {
+          "name": "keyword.control.blockchain.fl",
+          "match": "\\b(require|let)\\b"
+        }
+      ]
+    },
+
+    "modifiers": {
+      "patterns": [
+        {
+          "name": "storage.modifier.fl",
+          "match": "\\b(mut|signer|init|close|seeds)\\b"
+        }
+      ]
+    },
+
+    "connectives": {
+      "patterns": [
+        {
+          "name": "keyword.operator.connective.biconditional.fl",
+          "match": "↔|<->"
+        },
+        {
+          "name": "keyword.operator.connective.implication.fl",
+          "match": "→|->"
+        },
+        {
+          "name": "keyword.operator.connective.and.fl",
+          "match": "∧|&&"
+        },
+        {
+          "name": "keyword.operator.connective.or.fl",
+          "match": "∨|\\|\\|"
+        }
+      ]
+    },
+
+    "math-symbols": {
+      "patterns": [
+        {
+          "name": "keyword.operator.membership.fl",
+          "match": "∈"
+        },
+        {
+          "name": "keyword.operator.quantifier.fl",
+          "match": "[∀∃]"
+        },
+        {
+          "name": "keyword.operator.comparison.fl",
+          "match": "[≥≤≠]"
+        },
+        {
+          "name": "constant.language.math.fl",
+          "match": "[ℕ⊕]"
+        }
+      ]
+    },
+
+    "types": {
+      "patterns": [
+        {
+          "name": "support.type.primitive.fl",
+          "match": "\\b(Nat|Bool|String|Int|Float|Unit|List|Option|Result)\\b"
+        },
+        {
+          "name": "support.type.blockchain.fl",
+          "match": "\\b(Address|TokenAmount|Hash|Signature|Slot|Epoch)\\b"
+        },
+        {
+          "name": "constant.language.boolean.fl",
+          "match": "\\b(true|false)\\b"
+        }
+      ]
+    },
+
+    "numbers": {
+      "patterns": [
+        {
+          "name": "constant.numeric.hex.fl",
+          "match": "\\b0x[0-9a-fA-F]+\\b"
+        },
+        {
+          "name": "constant.numeric.decimal.fl",
+          "match": "\\b[0-9][0-9_]*\\b"
+        }
+      ]
+    },
+
+    "operators": {
+      "patterns": [
+        {
+          "name": "keyword.operator.comparison.fl",
+          "match": ">=|<=|!=|==|>|<"
+        },
+        {
+          "name": "keyword.operator.assignment.fl",
+          "match": "(?<![=><!])=(?![=>])"
+        },
+        {
+          "name": "keyword.operator.arithmetic.fl",
+          "match": "[+\\-*/]"
+        },
+        {
+          "name": "keyword.operator.pipe.fl",
+          "match": "(?<![|])\\|(?![|])"
+        }
+      ]
+    },
+
+    "punctuation": {
+      "patterns": [
+        {
+          "name": "punctuation.definition.block.fl",
+          "match": "[{}]"
+        },
+        {
+          "name": "punctuation.definition.parameters.fl",
+          "match": "[()]"
+        },
+        {
+          "name": "punctuation.separator.comma.fl",
+          "match": ","
+        },
+        {
+          "name": "punctuation.separator.colon.fl",
+          "match": ":"
+        }
+      ]
+    },
+
+    "identifiers": {
+      "patterns": [
+        {
+          "comment": "PascalCase = type/constructor",
+          "name": "entity.name.type.fl",
+          "match": "\\b[A-Z][A-Za-z0-9_]*\\b"
+        },
+        {
+          "comment": "camelCase/snake_case = variable",
+          "name": "variable.other.fl",
+          "match": "\\b[a-z_][A-Za-z0-9_₀-₉ₐ-ₙ]*\\b"
+        }
+      ]
+    }
+  }
+}
